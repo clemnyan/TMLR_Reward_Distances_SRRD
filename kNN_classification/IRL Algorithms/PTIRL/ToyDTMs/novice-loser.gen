@@ -1,0 +1,55 @@
+init.deploy.check S1,B1,empty.check S2,B1,empty.check S3,SP,ES.check S3,B1,ES.check S3,B2,ES.check S4,B1,EB.check S3,C,ES.check S4,B2,EB.check S4,C,EB
+init.deploy.check S1,B2,empty.check S2,B2,empty.check S3,SP,ES.check S3,B2,ES.check S3,C,ES.check S4,B2,EB.check S3,B1,ES.check S4,C,EB.check S4,B1,EB
+init.deploy.check S1,C,empty.check S2,C,empty.check S3,SP,ES.check S3,C,ES.check S3,B1,ES.check S4,C,EB.check S3,B2,ES.check S4,B1,EB.check S4,B2,EB
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S3,SP,EB.move B1,S3.attack S3,B1,EB.move B2,S3.attack S3,B2,EB.check S4,B2,ES.move C,S4.attack S4,C,ES
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S3,SP,EB.move B2,S3.attack S3,B2,EB.move C,S3.attack S3,C,EB.check S4,C,ES.move B1,S4.attack S4,B1,ES
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S3,SP,EB.move C,S3.attack S3,C,EB.move B1,S3.attack S3,B1,EB.check S4,B1,ES.move B2,S4.attack S4,B2,ES
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S4,SP,ES.move B1,S4.attack S4,B1,ES.move C,S4.attack S4,C,ES.check S3,C,EB.move B2,S3.attack S3,B2,EB
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S4,SP,ES.move B2,S4.attack S4,B2,ES.move B1,S4.attack S4,B1,ES.check S3,B1,EB.move C,S3.attack S3,C,EB
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S4,SP,ES.move C,S4.attack S4,C,ES.move B2,S4.attack S4,B2,ES.check S3,B2,EB.move B1,S3.attack S3,B1,EB
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S2,SP,ES.move B1,S2.attack S2,B1,ES.move C,S2.attack S2,C,ES.check S4,C,EB.move B2,S4.attack S4,B2,EB
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S2,SP,ES.move B2,S2.attack S2,B2,ES.move B1,S2.attack S2,B1,ES.check S4,B1,EB.move C,S4.attack S4,C,EB
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S2,SP,ES.move C,S2.attack S2,C,ES.move B2,S2.attack S2,B2,ES.check S4,B2,EB.move B1,S4.attack S4,B1,EB
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S4,SP,EB.move B1,S4.attack S4,B1,EB.move B2,S4.attack S4,B2,EB.check S2,B2,ES.move C,S2.attack S2,C,ES
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S4,SP,EB.move B2,S4.attack S4,B2,EB.move C,S4.attack S4,C,EB.check S2,C,ES.move B1,S2.attack S2,B1,ES
+init.deploy.check S1,SP,empty.check S3,SP,empty.check S4,SP,EB.move C,S4.attack S4,C,EB.move B1,S4.attack S4,B1,EB.check S2,B1,ES.move B2,S2.attack S2,B2,ES
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S2,SP,EB.move B1,S2.attack S2,B1,EB.move B2,S2.attack S2,B2,EB.check S3,B2,ES.move C,S3.attack S3,C,ES
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S2,SP,EB.move B2,S2.attack S2,B2,EB.move C,S2.attack S2,C,EB.check S3,C,ES.move B1,S3.attack S3,B1,ES
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S2,SP,EB.move C,S2.attack S2,C,EB.move B1,S2.attack S2,B1,EB.check S3,B1,ES.move B2,S3.attack S3,B2,ES
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S3,SP,ES.move B1,S3.attack S3,B1,ES.move C,S3.attack S3,C,ES.check S2,C,EB.move B2,S2.attack S2,B2,EB
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S3,SP,ES.move B2,S3.attack S3,B2,ES.move B1,S3.attack S3,B1,ES.check S2,B1,EB.move C,S2.attack S2,C,EB
+init.deploy.check S1,SP,empty.check S4,SP,empty.check S3,SP,ES.move C,S3.attack S3,C,ES.move B2,S3.attack S3,B2,ES.check S2,B2,EB.move B1,S2.attack S2,B1,EB
+init.deploy.check S2,B1,empty.check S1,B1,empty.check S3,SP,EB.check S3,B1,EB.check S3,C,EB.check S4,B1,ES.check S3,B2,EB.check S4,C,ES.check S4,B2,ES
+init.deploy.check S2,B1,empty.check S1,B1,empty.check S4,SP,ES.check S4,B1,ES.check S4,B2,ES.check S3,B1,EB.check S4,C,ES.check S3,B2,EB.check S3,C,EB
+init.deploy.check S2,B1,empty.check S3,B1,empty.check S1,SP,ES.check S1,B1,ES.check S1,B2,ES.check S4,B1,EB.check S1,C,ES.check S4,B2,EB.check S4,C,EB
+init.deploy.check S2,B1,empty.check S4,B1,empty.check S3,SP,ES.check S3,B1,ES.check S3,B2,ES.check S1,B1,EB.check S3,C,ES.check S1,B2,EB.check S1,C,EB
+init.deploy.check S2,B2,empty.check S1,B2,empty.check S4,SP,ES.check S4,B2,ES.check S4,C,ES.check S3,B2,EB.check S4,B1,ES.check S3,C,EB.check S3,B1,EB
+init.deploy.check S2,B2,empty.check S3,B2,empty.check S1,SP,ES.check S1,B2,ES.check S1,C,ES.check S4,B2,EB.check S1,B1,ES.check S4,C,EB.check S4,B1,EB
+init.deploy.check S2,B2,empty.check S4,B2,empty.check S3,SP,ES.check S3,B2,ES.check S3,C,ES.check S1,B2,EB.check S3,B1,ES.check S1,C,EB.check S1,B1,EB
+init.deploy.check S2,C,empty.check S1,C,empty.check S4,SP,ES.check S4,C,ES.check S4,B1,ES.check S3,C,EB.check S4,B2,ES.check S3,B1,EB.check S3,B2,EB
+init.deploy.check S2,C,empty.check S3,C,empty.check S1,SP,ES.check S1,C,ES.check S1,B1,ES.check S4,C,EB.check S1,B2,ES.check S4,B1,EB.check S4,B2,EB
+init.deploy.check S2,C,empty.check S4,C,empty.check S3,SP,ES.check S3,C,ES.check S3,B1,ES.check S1,C,EB.check S3,B2,ES.check S1,B1,EB.check S1,B2,EB
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S3,SP,ES.move B1,S3.attack S3,B1,ES.move C,S3.attack S3,C,ES.check S4,C,EB.move B2,S4.attack S4,B2,EB
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S3,SP,ES.move B2,S3.attack S3,B2,ES.move B1,S3.attack S3,B1,ES.check S4,B1,EB.move C,S4.attack S4,C,EB
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S3,SP,ES.move C,S3.attack S3,C,ES.move B2,S3.attack S3,B2,ES.check S4,B2,EB.move B1,S4.attack S4,B1,EB
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S4,SP,EB.move B1,S4.attack S4,B1,EB.move B2,S4.attack S4,B2,EB.check S3,B2,ES.move C,S3.attack S3,C,ES
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S4,SP,EB.move B2,S4.attack S4,B2,EB.move C,S4.attack S4,C,EB.check S3,C,ES.move B1,S3.attack S3,B1,ES
+init.deploy.check S2,SP,empty.check S1,SP,empty.check S4,SP,EB.move C,S4.attack S4,C,EB.move B1,S4.attack S4,B1,EB.check S3,B1,ES.move B2,S3.attack S3,B2,ES
+init.deploy.check S3,B1,empty.check S1,B1,empty.check S2,SP,ES.check S2,B1,ES.check S2,B2,ES.check S4,B1,EB.check S2,C,ES.check S4,B2,EB.check S4,C,EB
+init.deploy.check S3,B2,empty.check S1,B2,empty.check S2,SP,ES.check S2,B2,ES.check S2,C,ES.check S4,B2,EB.check S2,B1,ES.check S4,C,EB.check S4,B1,EB
+init.deploy.check S3,C,empty.check S1,C,empty.check S2,SP,ES.check S2,C,ES.check S2,B1,ES.check S4,C,EB.check S2,B2,ES.check S4,B1,EB.check S4,B2,EB
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S1,SP,ES.move B1,S1.attack S1,B1,ES.move C,S1.attack S1,C,ES.check S4,C,EB.move B2,S4.attack S4,B2,EB
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S1,SP,ES.move B2,S1.attack S1,B2,ES.move B1,S1.attack S1,B1,ES.check S4,B1,EB.move C,S4.attack S4,C,EB
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S1,SP,ES.move C,S1.attack S1,C,ES.move B2,S1.attack S1,B2,ES.check S4,B2,EB.move B1,S4.attack S4,B1,EB
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S4,SP,EB.move B1,S4.attack S4,B1,EB.move B2,S4.attack S4,B2,EB.check S1,B2,ES.move C,S1.attack S1,C,ES
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S4,SP,EB.move B2,S4.attack S4,B2,EB.move C,S4.attack S4,C,EB.check S1,C,ES.move B1,S1.attack S1,B1,ES
+init.deploy.check S3,SP,empty.check S2,SP,empty.check S4,SP,EB.move C,S4.attack S4,C,EB.move B1,S4.attack S4,B1,EB.check S1,B1,ES.move B2,S1.attack S1,B2,ES
+init.deploy.check S4,B1,empty.check S1,B1,empty.check S3,SP,ES.check S3,B1,ES.check S3,B2,ES.check S2,B1,EB.check S3,C,ES.check S2,B2,EB.check S2,C,EB
+init.deploy.check S4,B2,empty.check S1,B2,empty.check S3,SP,ES.check S3,B2,ES.check S3,C,ES.check S2,B2,EB.check S3,B1,ES.check S2,C,EB.check S2,B1,EB
+init.deploy.check S4,C,empty.check S1,C,empty.check S3,SP,ES.check S3,C,ES.check S3,B1,ES.check S2,C,EB.check S3,B2,ES.check S2,B1,EB.check S2,B2,EB
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S1,SP,EB.move B1,S1.attack S1,B1,EB.move B2,S1.attack S1,B2,EB.check S3,B2,ES.move C,S3.attack S3,C,ES
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S1,SP,EB.move B2,S1.attack S1,B2,EB.move C,S1.attack S1,C,EB.check S3,C,ES.move B1,S3.attack S3,B1,ES
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S1,SP,EB.move C,S1.attack S1,C,EB.move B1,S1.attack S1,B1,EB.check S3,B1,ES.move B2,S3.attack S3,B2,ES
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S3,SP,ES.move B1,S3.attack S3,B1,ES.move C,S3.attack S3,C,ES.check S1,C,EB.move B2,S1.attack S1,B2,EB
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S3,SP,ES.move B2,S3.attack S3,B2,ES.move B1,S3.attack S3,B1,ES.check S1,B1,EB.move C,S1.attack S1,C,EB
+init.deploy.check S4,SP,empty.check S2,SP,empty.check S3,SP,ES.move C,S3.attack S3,C,ES.move B2,S3.attack S3,B2,ES.check S1,B2,EB.move B1,S1.attack S1,B1,EB

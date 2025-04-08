@@ -1,0 +1,5 @@
+Academic single-user license for BARON.
+Licensed to Eugene Santos Jr. at Dartmouth College, Eugene.Santos.Jr@dartmouth.edu.
+License upgrades for all versions of BARON dating from 7-Dec-2019 to 14-Feb-2021.
+This license is perpetual.
+26D99B78817877C3

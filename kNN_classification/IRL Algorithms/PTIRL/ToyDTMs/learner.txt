@@ -1,0 +1,3 @@
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S3,SP,EB.move B1,S3.attack S3,B1,EB.move B2,S3.attack S3,B2,EB.check S4,B2,ES.move C,S4.attack S4,C,ES
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S4,SP,ES.move B2,S4.attack S4,B2,ES.move B1,S4.attack S4,B1,ES.check S3,B1,EB.move C,S3.attack S3,C,EB
+init.deploy.check S1,SP,empty.check S2,SP,empty.check S3,SP,EB.move B1,B2,C,S3.attack S3,B1,B2,C,EB.check S4,B1,B2,C,ES.attack S4,B2,B1,C,ES

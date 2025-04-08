@@ -1,0 +1,59 @@
+minimize
+	FRV_maxMagnitude11
+Subject To
+LER_0:	LER12 - 1.0  R0 = 0
+LER_1:	LER13 - 1.0  R2 = 0
+LER_2:	LER14 - 0.5  R4 - 1.0  R2 = 0
+LER_3:	LER15 - 0.5  R7 - 1.0  R9 = 0
+FRV_TARG_4:	R0 - FRV_TARG1 = 100.0
+FRV_TARG_maxMagnitude1_5:	FRV_TARG1 - FRV_maxMagnitude11 <= 0
+FRV_TARG_maxMagnitude2_6:	-FRV_TARG1 - FRV_maxMagnitude11 <= 0
+FRV_TARG_7:	R2 - FRV_TARG3 = 100.0
+FRV_TARG_maxMagnitude1_8:	FRV_TARG3 - FRV_maxMagnitude11 <= 0
+FRV_TARG_maxMagnitude2_9:	-FRV_TARG3 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_10:	R4 - FRV_NONTARG5 = -100.0
+FRV_NONTARG_maxMagnitude1_11:	FRV_NONTARG5 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_maxMagnitude2_12:	-FRV_NONTARG5 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_13:	R2 - FRV_NONTARG6 = -100.0
+FRV_NONTARG_maxMagnitude1_14:	FRV_NONTARG6 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_maxMagnitude2_15:	-FRV_NONTARG6 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_16:	R7 - FRV_NONTARG8 = -100.0
+FRV_NONTARG_maxMagnitude1_17:	FRV_NONTARG8 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_maxMagnitude2_18:	-FRV_NONTARG8 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_19:	R9 - FRV_NONTARG10 = -100.0
+FRV_NONTARG_maxMagnitude1_20:	FRV_NONTARG10 - FRV_maxMagnitude11 <= 0
+FRV_NONTARG_maxMagnitude2_21:	-FRV_NONTARG10 - FRV_maxMagnitude11 <= 0
+POSET22:	LB16 - UB18 <= 0
+POSET23:	LB17 - UB19 <= 0
+POSETS_24:	LB16 - UB19 - delta20 = 0
+POSETLB_25:	LB16 - LER12 <= 0
+POSETLB_26:	LB16 - LER13 <= 0
+POSETLB_27:	LB17 - LER14 <= 0
+POSETLB_28:	LB17 - LER15 <= 0
+POSETUB_29:	UB18 - LER12 >= 0
+POSETUB_30:	UB18 - LER13 >= 0
+POSETUB_31:	UB19 - LER14 >= 0
+POSETUB_32:	UB19 - LER15 >= 0
+Bounds
+ -100 <= R0 <=  100
+-200.0 <= FRV_TARG1 <= 200.0
+ -100 <= R2 <=  100
+-200.0 <= FRV_TARG3 <= 200.0
+ -100 <= R4 <=  100
+-200.0 <= FRV_NONTARG5 <= 200.0
+ -100 <= R2 <=  100
+-200.0 <= FRV_NONTARG6 <= 200.0
+ -100 <= R7 <=  100
+-200.0 <= FRV_NONTARG8 <= 200.0
+ -100 <= R9 <=  100
+-200.0 <= FRV_NONTARG10 <= 200.0
+ 1 <= delta20
+-infinity <= LER12
+-infinity <= LER13
+-infinity <= LER14
+-infinity <= LER15
+-infinity <= LB16
+-infinity <= UB18
+-infinity <= LB17
+-infinity <= UB19
+End

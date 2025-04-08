@@ -1,0 +1,187 @@
+version: 2.1  # Version of CircleCI config format
+
+# "Orbs" are reusable packages of CircleCI config.
+# They can simplify common tasks, such as interacting with external services.
+# This section lists orbs this config uses.
+orbs:
+  codecov: codecov/codecov@1.1.0  # support for uploading code coverage to codecov
+
+defaults: &defaults
+  docker:
+    - image: humancompatibleai/seals:base-alpha
+      auth:
+        username: $DOCKERHUB_USERNAME
+        password: $DOCKERHUB_PASSWORD
+  working_directory: /seals
+
+executors:
+  unit-test:
+    <<: *defaults
+    resource_class: large
+    environment:
+      # Don't use auto-detect since it sees all CPUs available, but container is throttled.
+      NUM_CPUS: 4
+  lintandtype:
+    <<: *defaults
+    resource_class: medium
+    environment:
+      # If you change these, also change ci/code_checks.sh
+      LINT_FILES: src/ tests/ docs/conf.py setup.py  # files we lint
+      # Files we statically type check. Source files like src/ should almost always be present.
+      # In this repo we also typecheck tests/ -- but sometimes you may want to exclude these
+      # if they do strange things with types (e.g. mocking).
+      TYPECHECK_FILES: src/ tests/ setup.py
+      # Don't use auto-detect since it sees all CPUs available, but container is throttled.
+      NUM_CPUS: 2
+
+
+commands:
+  # Define common function to install dependencies and seals, used in the jobs defined in the next section
+  dependencies:
+    description: "Check out and update Python dependencies."
+    steps:
+      - checkout  # Check out the code from Git
+
+      # Download and cache dependencies
+      # Note the Docker image must still be manually updated if any binary (non-Python) dependencies change.
+
+      # Restore cache if it exists. setup.py defines all the requirements, so we checksum that.
+      # If you want to force an update despite setup.py not changing, you can bump the version
+      # number `vn-dependencies`. This can be useful if newer versions of a package have been
+      # released that you want to upgrade to, without mandating the newer version in setup.py.
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ checksum "setup.py" }}-{{ checksum "ci/build_venv.sh" }}
+
+      # Create virtual environment and install dependencies using `ci/build_venv.sh`.
+      # `mujoco_py` needs a MuJoCo key, so download that first.
+      # We do some sanity checks to ensure the key works.
+      - run:
+          name: install dependencies
+          command: "[[ -d /venv ]] || /seals/ci/build_venv.sh /venv"
+
+      # Save the cache of dependencies.
+      - save_cache:
+          paths:
+            - /venv
+          key: v2-dependencies-{{ checksum "setup.py" }}-{{ checksum "ci/build_venv.sh" }}
+
+      # Install seals.
+      # Note we install the source distribution, not in developer mode (`pip install -e`).
+      # This ensures we're testing the package our users would experience, and in particular
+      # will catch e.g. modules or data files missing from `setup.py`.
+      - run:
+          name: install evaluating_rewards
+          # Build a wheel then install to avoid copying whole directory (pip issue #2195)
+          command: |
+            python setup.py sdist bdist_wheel
+            pip install --upgrade --force-reinstall --no-deps dist/seals-*.whl
+
+# The `jobs` section defines jobs that can be executed on CircleCI as part of workflows.
+jobs:
+  # `lintandtype` installs dependencies + `seals`, lints the code, builds the docs, and runs type checks.
+  lintandtype:
+    executor: lintandtype
+
+    steps:
+      - dependencies
+      - run:
+          name: flake8
+          command: flake8 ${LINT_FILES}
+
+      - run:
+          name: black
+          command: black --check ${LINT_FILES}
+
+      - run:
+          name: codespell
+          command: codespell -I .codespell.skip --skip='*.pyc' ${LINT_FILES}
+
+      - run:
+          name: sphinx
+          command: pushd docs/ && make clean && make html && popd
+
+      - run:
+          name: pytype
+          command: pytype ${TYPECHECK_FILES}
+
+      - run:
+          name: mypy
+          command: mypy ${TYPECHECK_FILES}
+
+  # `unit-test` runs the unit tests in `tests/`.
+  unit-test:
+    executor: unit-test
+    steps:
+      - dependencies
+
+      # Running out of memory is a common cause of spurious test failures.
+      # In particular, the CI machines have less memory than most workstations.
+      # So tests can pass locally but fail on CI. Record memory and other resource
+      # usage over time to aid with diagnosing these failures.
+      - run:
+          name: Memory Monitor
+          # | is needed for multi-line values in YAML
+          command: |
+            mkdir /tmp/resource-usage
+            export FILE=/tmp/resource-usage/memory.txt
+            while true; do
+              ps -u root eo pid,%cpu,%mem,args,uname --sort=-%mem >> $FILE
+              echo "----------" >> $FILE
+              sleep 1
+            done
+          background: true
+
+      # Run the unit tests themselves
+      - run:
+          name: run tests
+          command: |
+            # Xdummy-entrypoint.py: starts an X server and sets DISPLAY, then runs wrapped command.
+            # pytest arguments:
+            # --cov specifies which directories to report code coverage for
+            # Since we test the installed `seals`, our source files live in `venv`, not in `src/seals`.
+            # --junitxml records test results in JUnit format. We upload this file using `store_test_results`
+            # later, and CircleCI then parses this to pretty-print results.
+            # --shard-id and --num-shards are used to split tests across parallel executors using `pytest-shard`.
+            # -n uses `pytest-xdist` to parallelize tests within a single instance.
+            Xdummy-entrypoint.py pytest --cov=/venv/lib/python3.8/site-packages/seals --cov=tests \
+                   --junitxml=/tmp/test-reports/junit.xml \
+                    -n ${NUM_CPUS} -vv tests/
+            # Following two lines rewrite paths from venv/ to src/, based on `coverage:paths` in `setup.cfg`
+            # This is needed to avoid confusing Codecov
+            mv .coverage .coverage.bench
+            coverage combine
+      - codecov/upload
+
+      # Upload the test results and resource usage to CircleCI
+      - store_artifacts:
+          path: /tmp/test-reports
+          destination: test-reports
+      - store_artifacts:
+          path: /tmp/resource-usage
+          destination: resource-usage
+      # store_test_results uploads the files and tells CircleCI that it should parse them as test results
+      - store_test_results:
+          path: /tmp/test-reports
+
+# Workflows specify what jobs to actually run on CircleCI. If we didn't specify this,
+# nothing would run! Here we have just a single workflow, `test`, containing both the
+# jobs defined above. By default, the jobs all run in parallel. We can make them run
+# sequentially, or have more complex dependency structures, using the `require` command;
+# see https://circleci.com/docs/2.0/workflows/
+#
+# We attach two contexts to both jobs, which define a set of environment variable:
+# - `MuJoCo` which contains the URL for our MuJoCo license key.
+# - `docker-hub-creds` which contain the credentials for our Dockerhub machine user.
+# It's important these are kept confidential -- so don't echo the environment variables
+# anywhere in the config!
+workflows:
+  version: 2
+  test:
+    jobs:
+      - lintandtype:
+          context:
+          - docker-hub-creds
+      - unit-test:
+          context:
+          - docker-hub-creds
