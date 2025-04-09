@@ -17,9 +17,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import random
 import numpy as np
 import sys
-from value_iteration import *
-import img_utils
-from utils import *
 import pandas as pd
 from copy import deepcopy
 from sklearn.linear_model import LinearRegression
@@ -34,7 +31,6 @@ from scipy import stats
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.ensemble import ExtraTreesRegressor, GradientBoostingRegressor
-import tensorflow as tf
 from sklearn.metrics import r2_score
 from sklearn.metrics.pairwise import cosine_similarity
 from numpy.random import randn, seed
